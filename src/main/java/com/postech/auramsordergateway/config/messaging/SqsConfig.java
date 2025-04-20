@@ -1,33 +1,36 @@
 package com.postech.auramsordergateway.config.messaging;
 
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.client.builder.AwsClientBuilder;
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.sqs.SqsClient;
-
-import java.net.URI;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class SqsConfig {
 
-    @Value("${cloud.aws.endpoint}")
-    private String awsEndpoint;
+    @Value("${aws.region:us-east-1}")
+    private String region;
 
-    @Value("${cloud.aws.region}")
-    private String awsRegion;
+    @Value("${aws.credentials.access-key:test}")
+    private String accessKey;
+
+    @Value("${aws.credentials.secret-key:test}")
+    private String secretKey;
+
+    @Value("${aws.sqs.endpoint:http://localhost:4566}")
+    private String sqsEndpoint;
 
     @Bean
-    public SqsClient sqsClient() {
-        // Para o LocalStack, usamos credenciais fictícias
-        AwsBasicCredentials credentials = AwsBasicCredentials.create("test", "test");
-
-        return SqsClient.builder()
-                .region(Region.of(awsRegion))
-                .endpointOverride(URI.create(awsEndpoint))
-                .credentialsProvider(StaticCredentialsProvider.create(credentials))
+    @Primary
+    public AmazonSQS amazonSQSClient() {
+        return AmazonSQSClientBuilder.standard()
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(sqsEndpoint, region))
+                .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, secretKey)))
                 .build();
     }
 }

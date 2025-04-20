@@ -1,0 +1,36 @@
+services:
+  localstack:
+    container_name: localstack-sqs
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"      # LocalStack Gateway
+      - "4510-4559:4510-4559"  # Portas externas dinâmicas
+    environment:
+      - SERVICES=sqs
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./scripts:/docker-entrypoint-initaws.d"
+
+  init-aws:
+    image: amazon/aws-cli
+    environment:
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+    entrypoint: /bin/sh -c
+    command: >
+      "
+        # Espera o LocalStack estar pronto
+        sleep 10
+      
+        # Cria fila SQS para pedidos
+        aws --endpoint-url=http://localstack:4566 sqs create-queue --queue-name new-order-queue
+      
+        # Lista as filas para confirmar
+        aws --endpoint-url=http://localstack:4566 sqs list-queues
+      "
+    depends_on:
+      - localstack

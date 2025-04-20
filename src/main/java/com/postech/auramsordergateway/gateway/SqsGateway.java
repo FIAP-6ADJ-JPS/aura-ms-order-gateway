@@ -1,43 +1,47 @@
 package com.postech.auramsordergateway.gateway;
 
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.model.GetQueueUrlRequest;
+import com.amazonaws.services.sqs.model.GetQueueUrlResult;
+import com.amazonaws.services.sqs.model.SendMessageRequest;
+import com.amazonaws.services.sqs.model.SendMessageResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.postech.auramsordergateway.domain.OrderRequest;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import software.amazon.awssdk.services.sqs.SqsClient;
-import software.amazon.awssdk.services.sqs.model.GetQueueUrlRequest;
-import software.amazon.awssdk.services.sqs.model.SendMessageRequest;
-import software.amazon.awssdk.services.sqs.model.SendMessageResponse;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class SqsGateway {
 
-    private final SqsClient sqsClient;
+    private final AmazonSQS sqsClient;
     private final ObjectMapper objectMapper;
 
-    @Value("${cloud.aws.sqs.queue-name}")
+    @Value("${aws.sqs.order-queue-name:new-order-queue}")
     private String queueName;
+
+    @Autowired
+    public SqsGateway(AmazonSQS sqsClient, ObjectMapper objectMapper) {
+        this.sqsClient = sqsClient;
+        this.objectMapper = objectMapper;
+    }
 
     public String sendOrderToQueue(OrderRequest orderRequest) {
         try {
             String orderJson = objectMapper.writeValueAsString(orderRequest);
-
             String queueUrl = getQueueUrl();
 
-            SendMessageRequest sendMessageRequest = SendMessageRequest.builder()
-                    .queueUrl(queueUrl)
-                    .messageBody(orderJson)
-                    .build();
+            SendMessageRequest sendMessageRequest = new SendMessageRequest()
+                    .withQueueUrl(queueUrl)
+                    .withMessageBody(orderJson);
 
-            SendMessageResponse response = sqsClient.sendMessage(sendMessageRequest);
-            log.info("Message sent to SQS. Message ID: {}", response.messageId());
+            SendMessageResult result = sqsClient.sendMessage(sendMessageRequest);
+            log.info("Message sent to SQS. Message ID: {}", result.getMessageId());
 
-            return response.messageId();
+            return result.getMessageId();
         } catch (JsonProcessingException e) {
             log.error("Failed to convert order to JSON", e);
             throw new RuntimeException("Error sending message to queue", e);
@@ -45,9 +49,9 @@ public class SqsGateway {
     }
 
     private String getQueueUrl() {
-        GetQueueUrlRequest getQueueRequest = GetQueueUrlRequest.builder()
-                .queueName(queueName)
-                .build();
-        return sqsClient.getQueueUrl(getQueueRequest).queueUrl();
+        GetQueueUrlRequest getQueueRequest = new GetQueueUrlRequest()
+                .withQueueName(queueName);
+        GetQueueUrlResult result = sqsClient.getQueueUrl(getQueueRequest);
+        return result.getQueueUrl();
     }
 }
