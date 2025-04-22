@@ -1,10 +1,10 @@
-package com.postech.auramsordergateway;
+package com.postech.auramsorderreceiver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AuraMsOrderGatewayApplicationTests {
+class AuraMsOrderReceiverApplicationTests {
 
     @Test
     void contextLoads() {

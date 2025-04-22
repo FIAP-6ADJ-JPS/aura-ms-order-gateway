@@ -1,4 +1,4 @@
-package com.postech.auramsordergateway.adapters.dto;
+package com.postech.auramsorderreceiver.adapters.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentDataDTO {
-    private String creditCardNumber;
+public class OrderResponseDTO {
+    private String messageId;
+    private String status;
 }

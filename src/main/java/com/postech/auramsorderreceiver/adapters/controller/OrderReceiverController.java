@@ -1,12 +1,12 @@
-package com.postech.auramsordergateway.adapters.controller;
+package com.postech.auramsorderreceiver.adapters.controller;
 
 
-import com.postech.auramsordergateway.adapters.dto.OrderRequestDTO;
-import com.postech.auramsordergateway.adapters.dto.OrderResponseDTO;
-import com.postech.auramsordergateway.config.modelmapper.OrderModelMapper;
-import com.postech.auramsordergateway.application.ReceiveOrderUseCase;
-import com.postech.auramsordergateway.domain.OrderRequest;
-import com.postech.auramsordergateway.domain.enums.OrderStatus;
+import com.postech.auramsorderreceiver.adapters.dto.OrderRequestDTO;
+import com.postech.auramsorderreceiver.adapters.dto.OrderResponseDTO;
+import com.postech.auramsorderreceiver.config.modelmapper.OrderModelMapper;
+import com.postech.auramsorderreceiver.application.ReceiveOrderUseCase;
+import com.postech.auramsorderreceiver.domain.OrderRequest;
+import com.postech.auramsorderreceiver.domain.enums.OrderStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

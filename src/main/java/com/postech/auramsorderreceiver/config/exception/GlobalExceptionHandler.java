@@ -1,4 +1,4 @@
-package com.postech.auramsordergateway.config.exception;
+package com.postech.auramsorderreceiver.config.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

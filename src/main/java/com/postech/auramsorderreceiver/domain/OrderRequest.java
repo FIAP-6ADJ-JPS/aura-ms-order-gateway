@@ -1,4 +1,4 @@
-package com.postech.auramsordergateway.domain;
+package com.postech.auramsorderreceiver.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

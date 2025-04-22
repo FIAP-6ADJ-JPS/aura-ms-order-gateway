@@ -1,12 +1,12 @@
-package com.postech.auramsordergateway.config.modelmapper;
+package com.postech.auramsorderreceiver.config.modelmapper;
 
 
-import com.postech.auramsordergateway.adapters.dto.OrderItemDTO;
-import com.postech.auramsordergateway.adapters.dto.OrderRequestDTO;
-import com.postech.auramsordergateway.adapters.dto.PaymentDataDTO;
-import com.postech.auramsordergateway.domain.OrderItem;
-import com.postech.auramsordergateway.domain.OrderRequest;
-import com.postech.auramsordergateway.domain.PaymentData;
+import com.postech.auramsorderreceiver.adapters.dto.OrderItemDTO;
+import com.postech.auramsorderreceiver.adapters.dto.OrderRequestDTO;
+import com.postech.auramsorderreceiver.adapters.dto.PaymentDataDTO;
+import com.postech.auramsorderreceiver.domain.OrderItem;
+import com.postech.auramsorderreceiver.domain.OrderRequest;
+import com.postech.auramsorderreceiver.domain.PaymentData;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

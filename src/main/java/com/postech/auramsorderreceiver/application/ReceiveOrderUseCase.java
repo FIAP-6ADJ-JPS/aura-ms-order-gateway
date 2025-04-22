@@ -1,7 +1,7 @@
-package com.postech.auramsordergateway.application;
+package com.postech.auramsorderreceiver.application;
 
-import com.postech.auramsordergateway.domain.OrderRequest;
-import com.postech.auramsordergateway.gateway.SqsGateway;
+import com.postech.auramsorderreceiver.domain.OrderRequest;
+import com.postech.auramsorderreceiver.gateway.SqsGateway;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

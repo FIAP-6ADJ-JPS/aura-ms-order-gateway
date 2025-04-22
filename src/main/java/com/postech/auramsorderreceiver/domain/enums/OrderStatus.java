@@ -1,4 +1,4 @@
-package com.postech.auramsordergateway.domain.enums;
+package com.postech.auramsorderreceiver.domain.enums;
 
 public enum OrderStatus {
     ABERTO,

@@ -1,9 +1,9 @@
-package com.postech.auramsordergateway.application;
+package com.postech.auramsorderreceiver.application;
 
-import com.postech.auramsordergateway.domain.OrderItem;
-import com.postech.auramsordergateway.domain.OrderRequest;
-import com.postech.auramsordergateway.domain.PaymentData;
-import com.postech.auramsordergateway.gateway.SqsGateway;
+import com.postech.auramsorderreceiver.domain.OrderItem;
+import com.postech.auramsorderreceiver.domain.OrderRequest;
+import com.postech.auramsorderreceiver.domain.PaymentData;
+import com.postech.auramsorderreceiver.gateway.SqsGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,4 +1,4 @@
-package com.postech.auramsordergateway.adapters.dto;
+package com.postech.auramsorderreceiver.adapters.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

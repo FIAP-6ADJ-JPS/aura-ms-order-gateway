@@ -1,4 +1,4 @@
-package com.postech.auramsordergateway.config.messaging;
+package com.postech.auramsorderreceiver.config.messaging;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;

@@ -1,4 +1,4 @@
-package com.postech.auramsordergateway.gateway;
+package com.postech.auramsorderreceiver.gateway;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.model.GetQueueUrlRequest;
@@ -7,7 +7,7 @@ import com.amazonaws.services.sqs.model.SendMessageRequest;
 import com.amazonaws.services.sqs.model.SendMessageResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.postech.auramsordergateway.domain.OrderRequest;
+import com.postech.auramsorderreceiver.domain.OrderRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
