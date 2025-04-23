@@ -1,6 +1,6 @@
 services:
   localstack:
-    container_name: localstack-sqs
+    container_name: localstack-producer
     image: localstack/localstack:latest
     ports:
       - "4566:4566"      # LocalStack Gateway
@@ -14,7 +14,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "./scripts:/docker-entrypoint-initaws.d"
 
-  init-aws:
+  init-sqs-producer:
     image: amazon/aws-cli
     environment:
       - AWS_ACCESS_KEY_ID=test

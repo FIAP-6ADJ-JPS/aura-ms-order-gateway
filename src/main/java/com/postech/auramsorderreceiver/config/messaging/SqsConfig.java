@@ -22,7 +22,7 @@ public class SqsConfig {
     @Value("${aws.credentials.secret-key:test}")
     private String secretKey;
 
-    @Value("${aws.sqs.endpoint:http://localhost:4566}")
+    @Value("${aws.sqs.endpoint:http://localhost:4567}")
     private String sqsEndpoint;
 
     @Bean

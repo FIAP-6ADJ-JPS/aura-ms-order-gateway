@@ -39,7 +39,7 @@ public class SqsGateway {
                     .withMessageBody(orderJson);
 
             SendMessageResult result = sqsClient.sendMessage(sendMessageRequest);
-            log.info("Message sent to SQS. Message ID: {}", result.getMessageId());
+            log.info("Message sent to SQS. Message ID: {}", result.getMessageId(), "Queue URL: {}", queueUrl);
 
             return result.getMessageId();
         } catch (JsonProcessingException e) {
